@@ -332,19 +332,13 @@ footer{margin-top:72px;padding:36px 0;text-align:center;color:var(--muted);font-
 
 <script>
 (function(){
-  /* ====== COMPLETÁ ACÁ TUS VIDEOS Y LINKS ======
-     YouTube: pegá el ID o el link completo (se limpia solo, incluso con &t=7s). Ej: youtube.com/watch?v=dQw4w9WgXcQ → 'dQw4w9WgXcQ'
-     Google Drive: pegá el link de compartir (el archivo tiene que estar en «Cualquier persona con el vínculo»). Ej: {type:'drive',id:'https://drive.google.com/file/d/XXXX/view',title:'Reel'}
-     Varios videos chicos en grilla (ocupan poco lugar): {type:'grid',items:[{src:'videos/avlive.mp4',title:'AV LIVE'},{src:'videos/slicelab.mp4',title:'SliceLab'}]}
-     Con silent:true el video va mudo, en loop y arranca solo (como un GIF); sin eso, se reproduce al tocarlo y con sonido.
-     Archivo propio: poné el archivo en la carpeta "videos/" junto a este HTML y escribí la ruta. Ej: 'videos/reel.mp4'
-     Lo que esté vacío ('') no se muestra, así que no se rompe nada. */
+  
   var MEDIA={
     dreamstates:[{type:'youtube',id:'wleTV9n3Q1k',title:'Dreamstates TV'}],
     tercerbrazo:[{type:'instagram',url:'https://www.instagram.com/p/C-F9_3wNUnc/',title:'Tercer Brazo Estudio'}],
     torneo:[{type:'youtube',id:'sd6yKi8uXUY',title:'Torneo Argentino Rojas'}],
     freelance:[{type:'file',src:'videos/capsula-geikha.mp4',poster:'',title:'Cápsula Geikha — Modulaciones'},{type:'file',src:'videos/presentacioncv2612.mp4',poster:'',title:'Presentación'},{type:'file',src:'videos/girlstothefront.mp4',poster:'',title:'Girls to the Front'}],
-    vj:[{type:'grid',items:[{yt:'gw2OW2eIVOk',title:'Visuales en vivo (VJ)'},{src:'videos/paulina2.mp4',title:'Paulina',silent:true},{src:'videos/aili.mp4',full:'videos/aili_full.mp4',title:'Aili',silent:true},{img:'imagen/VISUALES.jpg',title:'Visuales 1'},{img:'imagen/VISUALES2.jpg',title:'Visuales 2'}]}],
+    vj:[{type:'grid',items:[{yt:'gw2OW2eIVOk',title:'Visuales en vivo (VJ)'},{src:'videos/paulina2.mp4',title:'Minicomponente',silent:true},{src:'videos/aili.mp4',full:'videos/aili_full.mp4',title:'Aquatic soundsystem',silent:true},{img:'imagen/VISUALES.jpg',title:'Panoramica'},{img:'imagen/VISUALES2.jpg',title:'Panoramica'}]}],
     modulaciones:[{type:'youtube',id:'x8HAEXfsnpM',title:'Modulaciones'}],
     catedra:[{type:'gallery',images:[{src:'',alt:''}]},{type:'grid',items:[{src:'videos/docencia.mp4',title:'Proyecto Visual 3',silent:true,mute:true},{src:'videos/docencia2.mp4',title:'Proyecto Visual 3',silent:true,mute:true}]}],
     suites:[{type:'grid',items:[{src:'videos/avlive.mp4',full:'videos/avlive_full.mp4',title:'AV LIVE',silent:true,mute:true},{src:'videos/SliceLab.mp4',title:'SliceLab',silent:true,mute:true},{src:'videos/sentiolab.mp4',title:'SentioLab',silent:true,mute:true},{src:'videos/mohaly.mp4',title:'Moholy-Nagy Studio',silent:true,mute:true},{src:'videos/tanglelab.mp4',title:'TangleLab',silent:true,mute:true}]},{type:'embed',src:'',title:'Demo en vivo'}]
@@ -372,7 +366,6 @@ footer{margin-top:72px;padding:36px 0;text-align:center;color:var(--muted);font-
     });
     return ytP;
   }
-  /* ph = marcador ya puesto en el DOM; se reemplaza por el reproductor y se fuerza el inicio (por defecto 0:00, sin retomar donde se dejó) */
   function ytEmbed(ph,id,st,title){
     st=+st||0;
     function plain(){
