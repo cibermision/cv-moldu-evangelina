@@ -152,14 +152,24 @@ footer{margin-top:72px;padding:36px 0;text-align:center;color:var(--muted);font-
 }
 @media print{
   :root{--bg:#fff;--card:#fff;--line:#d9d9e0;--text:#222;--muted:#555;--bright:#000;--accent:#5b46d6}
-  body{background:#fff}
   @page{size:A4;margin:14mm}
+  html{font-size:11px}
+  body{background:#fff!important;background-image:none!important;line-height:1.28;overflow:visible}
   header,.menu-panel,.media,.chip svg,.frame,.gallery,.igwrap,.vgrid,.fw-back,video,iframe{display:none!important}
-  body{background-image:none!important}
+  .container{max-width:none;padding:0}
   .links a::after,.ylink::after{content:" — " attr(href);color:#555;font-size:.8rem}
-  .avatar{box-shadow:none}
-  .hero,.card{backdrop-filter:none;box-shadow:none}
-  .entry{break-inside:avoid}
+  .hero{margin:0 0 8px;padding:12px 16px;gap:16px;border:none;border-bottom:1px solid var(--line);border-radius:0;backdrop-filter:none;box-shadow:none}
+  .hero h1{font-size:2rem}
+  .role{margin-top:6px}.chips{margin-top:8px;gap:6px}.chip{padding:3px 10px}
+  .avatar{width:84px;height:84px;padding:2px;background:none;box-shadow:none}
+  section{padding:10px 0 0}
+  .section-title{font-size:1.25rem;margin-bottom:10px}
+  .card,.card.pad{padding:0;border:none;border-radius:0;backdrop-filter:none;box-shadow:none}
+  .entry{padding:5px 0;gap:2px 16px;grid-template-columns:80px 1fr;break-inside:avoid}
+  .skill{padding:4px 0;grid-template-columns:200px 1fr;gap:2px 16px}
+  .lede{font-size:1rem;line-height:1.45}
+  .subhead{padding:8px 0 2px}
+  .grid2{gap:16px}.grid2 .entry{padding:4px 0}
 }
 </style>
 </head>
