@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evangelina Moldú — Editora de video</title>
+<meta name="description" content="Evangelina Moldú (vanshi/sinergy). Editora de video, VJ y artista multimedial. Buenos Aires.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d11; --card:rgba(22,22,29,.75); --line:rgba(255,255,255,.08);
+  --accent:#8A73FF; --glow:rgba(138,115,255,.25);
+  --text:#E2E8F0; --muted:#94A3B8; --bright:#fff;
+  --h:'Space Grotesk',sans-serif; --b:'Inter',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--b);line-height:1.65;overflow-x:hidden;
+  background-image:radial-gradient(60vw 50vh at 85% -5%,var(--glow),transparent 70%),radial-gradient(50vw 40vh at 0% 40%,rgba(138,115,255,.08),transparent 70%);
+  background-attachment:fixed;
+}
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* Header */
+header{position:sticky;top:0;z-index:100;padding:14px 0;border-bottom:1px solid var(--line);background:rgba(13,13,17,.85);backdrop-filter:blur(12px)}
+.nav{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:var(--h);font-weight:700;font-size:1.05rem;color:var(--bright);text-decoration:none}
+.menu-btn{background:none;border:1px solid var(--line);border-radius:10px;width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--bright);transition:transform .3s,opacity .2s}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.menu-panel{position:absolute;top:100%;right:24px;min-width:230px;background:rgba(13,13,17,.97);border:1px solid var(--line);border-radius:12px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s,transform .25s,visibility .25s}
+.menu-panel.open{opacity:1;visibility:visible;transform:none}
+.menu-panel ul{list-style:none}
+.menu-panel a{display:block;padding:13px 16px;border-radius:8px;color:var(--text);text-decoration:none;font-size:.95rem}
+.menu-panel a:hover{background:rgba(138,115,255,.12);color:var(--accent)}
+
+/* Hero */
+.hero{margin:72px 0 24px;padding:48px 44px;background:var(--card);border:1px solid var(--line);border-radius:12px;backdrop-filter:blur(8px)}
+.hero h1{font-family:var(--h);font-weight:700;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.05;color:var(--bright);letter-spacing:-.02em}
+.alias{font-family:var(--h);font-weight:300;color:var(--muted);font-size:1.1rem;margin-top:8px}
+.role{margin-top:22px;font-family:var(--h);font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;font-size:.9rem;color:var(--text);text-decoration:none;background:rgba(255,255,255,.03)}
+a.chip:hover{border-color:var(--accent);color:var(--accent)}
+
+.hero{display:flex;align-items:center;justify-content:space-between;gap:32px}
+.avatar{flex-shrink:0;width:190px;height:190px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--accent),rgba(138,115,255,.25));box-shadow:0 0 36px var(--glow);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.avatar .ini{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#16161d;color:var(--accent);font-family:var(--h);font-weight:700;font-size:3.4rem}
+
+/* Secciones */
+section{padding:52px 0 8px}
+.section-title{font-family:var(--h);font-size:1.7rem;color:var(--bright);margin-bottom:28px;position:relative;display:inline-block}
+.section-title::after{content:'';position:absolute;bottom:-6px;left:0;width:40%;height:2px;background:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 32px;backdrop-filter:blur(8px)}
+.card.pad{padding:30px 32px}
+.lede{font-weight:300;font-size:1.1rem;line-height:1.75;max-width:68ch}
+.lede + .lede{margin-top:14px}
+.note{color:var(--muted);font-size:.9rem;margin-bottom:6px}
+
+.entry{display:grid;grid-template-columns:96px 1fr;gap:4px 28px;padding:22px 0;border-bottom:1px solid var(--line)}
+.entry:last-child{border-bottom:none}
+.date{font-family:var(--h);font-size:.85rem;color:var(--accent);padding-top:3px;letter-spacing:.02em}
+.title{font-family:var(--h);font-weight:600;font-size:1.05rem;color:var(--bright)}
+.sub{font-size:.88rem;color:var(--accent);margin:2px 0 6px}
+.desc{font-size:.93rem;color:var(--muted)}
+
+.skill{display:grid;grid-template-columns:250px 1fr;gap:4px 28px;padding:18px 0;border-bottom:1px solid var(--line)}
+.skill:last-child{border-bottom:none}
+.skill b{font-family:var(--h);font-weight:600;color:var(--bright);font-size:.98rem}
+.skill div{font-size:.93rem;color:var(--muted)}
+
+.grid2{display:grid;grid-template-columns:1fr 1.5fr;gap:24px}
+.subhead{font-family:var(--h);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding:20px 0 4px}
+.grid2 .entry{grid-template-columns:1fr;padding:16px 0}
+.grid2 .entry.d{grid-template-columns:64px 1fr;gap:4px 16px}
+
+
+/* Botón guardar PDF */
+.print-btn{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px 0 14px;border:1px solid var(--accent);border-radius:999px;background:rgba(138,115,255,.12);color:var(--bright);font-family:var(--h);font-weight:600;font-size:.9rem;cursor:pointer;transition:background .2s,box-shadow .2s,transform .1s}
+.print-btn:hover{background:var(--accent);box-shadow:0 0 22px var(--glow)}
+.print-btn:active{transform:translateY(1px)}
+
+/* Media */
+.vmsg{margin-top:8px;font-size:.85rem;color:#f0a8a8;max-width:620px}
+.igwrap{max-width:620px}
+.igwrap .instagram-media{margin:0 auto!important}
+.ig{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:10px;background:linear-gradient(135deg,rgba(138,115,255,.22),#101016);color:var(--bright);font-family:var(--h);font-weight:600;font-size:.9rem;cursor:pointer}
+.ig:hover svg{transform:scale(1.08)}
+.ig svg{transition:transform .2s}
+.igwrap iframe{display:block;width:100%;height:620px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.ylink{display:inline-block;margin-top:8px;font-size:.82rem;color:var(--muted);text-decoration:none}
+.ylink:hover{color:var(--accent)}
+.media{margin-top:16px;display:flex;flex-direction:column;gap:14px}
+.media:empty{display:none}
+.frame{position:relative;aspect-ratio:16/9;max-width:620px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#09090c}
+.frame iframe,.frame video,.frame .yt,.frame .live{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt,.live{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;color:var(--bright);font-family:var(--h);font-weight:600;font-size:.9rem;background:#101016 center/cover no-repeat;border:0}
+.yt:hover svg,.live:hover svg{transform:scale(1.08)}
+.yt svg,.live svg{transition:transform .2s}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;max-width:620px}
+.vgrid .frame{max-width:none}
+.vtile{cursor:pointer}
+.vtile .frame{transition:border-color .2s,transform .2s}
+.vtile:hover .frame,.vtile:focus-within .frame{border-color:var(--accent);transform:translateY(-2px)}
+.vopen{position:absolute;inset:0;z-index:2;width:100%;height:100%;border:0;padding:0;background:transparent;cursor:pointer}
+.vopen:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:10px}
+.fw-back{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(6,6,10,.62);backdrop-filter:blur(4px)}
+.fw-back[hidden]{display:none}
+.fw{display:flex;flex-direction:column;width:min(92vw,900px);max-height:88vh;border:1px solid var(--line);border-radius:12px;background:#0c0c11;box-shadow:0 24px 80px rgba(0,0,0,.6);overflow:hidden}
+.fw-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 10px 16px;background:#101016;border-bottom:1px solid var(--line);cursor:grab;touch-action:none;user-select:none}
+.fw-bar:active{cursor:grabbing}
+.fw-title{font-family:var(--h);font-weight:600;font-size:.9rem;color:var(--bright)}
+.fw-x{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.04);color:var(--text);font-size:1.1rem;line-height:1;cursor:pointer}
+.fw-x:hover{border-color:var(--accent);color:var(--accent)}
+.fw-yt{width:100%;aspect-ratio:16/9;background:#000}
+.fw img{display:block;width:100%;max-height:calc(88vh - 52px);object-fit:contain;background:#000}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fw iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#000}
+.fw video{display:block;width:100%;max-height:calc(88vh - 52px);background:#000;object-fit:contain}
+.vplay{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;border:0;padding:0;background:rgba(9,9,12,.25);cursor:pointer}
+.vplay[hidden]{display:none}
+.vplay:hover svg{transform:scale(1.08)}
+.vplay svg{transition:transform .2s}
+.vcap{margin:6px 0 0;font-size:.8rem;color:var(--muted)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;max-width:620px}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;font-size:.88rem;text-decoration:none;color:var(--text);background:rgba(255,255,255,.03);transition:border-color .2s,color .2s}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{margin-top:72px;padding:36px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+
+@media(max-width:560px){.brand{display:none}}
+@media(max-width:720px){
+  .container{padding:0 18px}
+  .hero{margin-top:40px;padding:30px 22px;flex-direction:column-reverse;align-items:flex-start;gap:24px}
+  .avatar{width:130px;height:130px}
+  .card,.card.pad{padding:8px 20px}.card.pad{padding:24px 20px}
+  .entry,.skill,.grid2,.grid2 .entry.d{grid-template-columns:1fr}
+  .grid2{gap:0}
+  .date{padding-top:0}
+  .menu-panel{right:18px}
+  .print-btn{padding:0 14px 0 12px}
+}
+@media print{
+  :root{--bg:#fff;--card:#fff;--line:#d9d9e0;--text:#222;--muted:#555;--bright:#000;--accent:#5b46d6}
+  body{background:#fff}
+  @page{size:A4;margin:14mm}
+  header,.chip svg,.frame,.gallery,.igwrap,.vgrid,.fw-back{display:none}
+  .links a::after,.ylink::after{content:" — " attr(href);color:#555;font-size:.8rem}
+  .avatar{box-shadow:none}
+  .hero,.card{backdrop-filter:none;break-inside:avoid}
+  .entry{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <button type="button" class="print-btn" id="printBtn" title="Se abre la impresión: elegí «Guardar como PDF»" aria-label="Guardar el CV como PDF"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></svg><span>Guardar PDF</span></button>
+    <a href="#top" class="brand">Evangelina Moldú</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  </div>
+  <nav id="menu" class="menu-panel" aria-label="Secciones">
+    <ul>
+      <li><a href="#perfil">Perfil</a></li>
+      <li><a href="#video">Experiencia en video</a></li>
+      <li><a href="#otra">Otra experiencia</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#obras">Obras y proyectos</a></li>
+      <li><a href="#formacion">Formación</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="container" id="top">
+
+  <div class="hero">
+   <div>
+    <h1>Evangelina Moldú</h1>
+    <p class="alias">aka vanshi/sinergy</p>
+    <p class="role">Editora de video · VJ · Artista multimedial</p>
+    <div class="chips">
+      <span class="chip">Buenos Aires, Argentina</span>
+      <a class="chip" href="tel:+5491173665317">11 7366 5317</a>
+      <a class="chip" href="mailto:molduvanshi@gmail.com">molduvanshi@gmail.com</a>
+     
+    </div>
+   </div>
+   <div class="avatar"><img src="imagen/evangelina.jpg" alt="Evangelina Moldú" onerror="this.parentNode.innerHTML='<div class=&quot;ini&quot;>EM</div>'"></div>
+  </div>
+
+  <section id="perfil">
+    <h2 class="section-title">Perfil profesional</h2>
+    <div class="card pad">
+      <p class="lede">Hace más de diez años edito video, sobre todo música en vivo, eventos y contenido para redes.</p>
+      <p class="lede">Mi formación en Artes Multimediales y Electrónicas en la UNA suma una mirada propia sobre imagen y sonido. Edito, trabajo también con visuales en vivo y interfaces DIY que diseño para generar interactividad en tiempo real, en performances escénicas e instalaciones.</p>
+    </div>
+  </section>
+
+  <section id="video">
+    <h2 class="section-title">Experiencia en edición de video</h2>
+    <div class="card">
+      <div class="entry"><div class="date">2026</div><div><p class="title">Curaduría, producción y audiovisual</p><p class="desc">Modulaciones — Evento A/V cruzando sonido y visuales en vivo.</p>
+          <div class="media" data-media="modulaciones"></div></div></div>
+      <div class="entry">
+        <div class="date">2011–hoy</div>
+        <div>
+          <p class="title">Dreamstates TV</p>
+          <p class="sub">Editora de video y camarógrafa · eventos de música en vivo</p>
+          <p class="desc">Cobertura de eventos musicales: cámara, grabación de audio con equipo profesional y postproducción. Todo el flujo, de la captura a la entrega. Multicámara y grabación en vivo, edición y mezcla básica de sonido, edición rítmica para presentaciones y resúmenes, y una imagen acorde a la energía de cada show.</p>
+          <div class="media" data-media="dreamstates"></div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="date">2019–hoy</div>
+        <div>
+          <p class="title">Tercer Brazo Estudio – Taller</p>
+          <p class="sub">Editora de video y creadora de contenido digital</p>
+          <p class="desc">Grabación y edición de videos para YouTube, Instagram, Reels y resúmenes de eventos. Gráficos animados para eventos y piezas promocionales, y diseño de flyers para cursos y actividades. Foco en la autenticidad y en una narrativa visual que conecte con la comunidad.</p>
+          <div class="media" data-media="tercerbrazo"></div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="date">2023–24</div>
+        <div>
+          <p class="title">Torneo Argentino Rojas</p>
+          <p class="sub">Camarógrafa y editora · torneo infantil de fútbol</p>
+          <p class="desc">Filmación de partidos y resúmenes diarios con plazos estrictos, alineados al calendario del torneo. Selección de momentos clave, edición rítmica, sonido y mezcla básica, y fotos del goleador de cada partido.</p>
+          <div class="media" data-media="torneo"></div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="date">Freelance</div>
+        <div>
+          <p class="title">Otros proyectos</p>
+          <p class="desc">Reels, Feria Mix, Drole, TBRZ, Modulaciones, entre otros.</p>
+          <div class="media" data-media="freelance"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="otra">
+    <h2 class="section-title">Otra experiencia</h2>
+    <div class="card">
+      <div class="entry"><div class="date">2026</div><div><p class="title">Web / Software de arte generativo y video</p><p class="desc">Desarrolladas para VJing e interactividad en vivo: AV LIVE, SliceLab, SentioLab, Moholy-Nagy Studio, TANGLE LAB.</p>
+          <div class="media" data-media="suites"></div></div></div>
+      <div class="entry"><div class="date">2025–26</div><div><p class="title">Ayudante de cátedra</p><p class="desc">Proyecto Visual 3, UNA.</p>
+          <div class="media" data-media="catedra"></div></div></div>
+      <div class="entry"><div class="date">2016–26</div><div><p class="title">Visuales en vivo (VJ)</p><p class="desc">Independiente, para músicos y performers.</p>
+          <div class="media" data-media="vj"></div></div></div>
+       <div class="entry"><div class="date">2022–23</div><div><p class="title">Equipo de producción</p><p class="desc">FAUNA.</p></div></div>
+      <div class="entry"><div class="date">2011–19</div><div><p class="title">Gestión cultural, radio y difusión</p><p class="desc">Escena de música electrónica, Tecnópolis.</p></div></div>
+    </div>
+  </section>
+
+  <section id="habilidades">
+    <h2 class="section-title">Habilidades técnicas</h2>
+    <div class="card">
+      <div class="skill"><b>Edición y postproducción</b><div>Premiere Pro, títulos y gráficos animados, transiciones, subtítulos, formatos para YouTube, Instagram y Reels.</div></div>
+      <div class="skill"><b>Rodaje y sonido</b><div>Operación de cámara, multicámara, grabación de audio, edición y mezcla básica de sonido en Reaper.</div></div>
+      <div class="skill"><b>Imagen y diseño</b><div>Diseño gráfico, fotografía, efectos visuales y motion. Photoshop, Illustrator.</div></div>
+      <div class="skill"><b>Creative coding y visuales generativas</b><div>Hydra Synth, GLSL / Shaders, Processing, p5.js, WebGL.</div></div>
+      <div class="skill"><b>Audio y computación física</b><div>Pure Data, Arduino, MIDI / OSC, sensores (LDR, piezoeléctricos).</div></div>
+      <div class="skill"><b>Software AV y escena en vivo</b><div>Resolume Arena, VDMX8, video analógico / circuito cerrado.</div></div>
+      <div class="skill"><b>Desarrollo</b><div>Python, Visual Studio Code, Trae, Antigravity.</div></div>
+      <div class="skill"><b>IA aplicada a flujos AV</b><div>Generación y edición de imágenes, text-to-speech, música y video. Claude, ChatGPT, Gemini, Copilot, Krea, Flux.</div></div>
+    </div>
+  </section>
+
+  <section id="obras">
+    <h2 class="section-title">Obras y proyectos</h2>
+    <div class="card">
+      <div class="entry"><div class="date">2025</div><div><p class="title">Interfaz dispositivo de luz láser / arpa láser</p><p class="desc">Diseño y ensamblado de instrumento de cuerdas de luz con calibración de fotosensores vía Arduino y síntesis aditiva/control en tiempo real mediante Pure Data.</p></div></div>
+      <div class="entry"><div class="date">2025</div><div><p class="title">Interfaz sonora</p><p class="desc">Sampler construido con Arduino.</p></div></div>
+      <div class="entry"><div class="date">2025</div><div><p class="title">Diseño sonoro en Pure Data y técnica en vivo — obra "Otro"</p><p class="desc">Laboratorio de Artes Vivas y Nuevas Tecnologías.</p></div></div>
+      <div class="entry"><div class="date">2024</div><div><p class="title">Umbral.obj</p><p class="desc">Dispositivo láser reactivo al sonido en circuito cerrado con televisores, Distrito de Arte Once. Captación sonora y ruteo a video analógico en CRT; múltiples pantallas proyectaban un circuito cerrado donde el dispositivo, a través de un jack, era estimulado para la creación de diferentes ondas sonoras.</p></div></div>
+      <div class="entry"><div class="date">2024</div><div><p class="title">135</p><p class="desc">Instalación de arte electrónico sobre la crisis de salud mental en Argentina, colaborativo (UNA).</p></div></div>
+      <div class="entry"><div class="date">2022</div><div><p class="title">La magia del colapso</p><p class="desc">Instalación interactiva con mapping e IA (UNA).</p></div></div>
+      <div class="entry"><div class="date">2022</div><div><p class="title">Performance con dispositivos piezoeléctricos</p><p class="desc">Cuerpo e hibridación tecnológica.</p></div></div>
+      <div class="entry"><div class="date">2022</div><div><p class="title">FASE Net Art</p><p class="desc">Obra hipertextual/hipermedia (UNA).</p></div></div>
+      <div class="entry"><div class="date">2019</div><div><p class="title">"(im)permanencia"</p><p class="desc">Con InTAD, danza y tecnología.</p></div></div>
+    </div>
+  </section>
+
+  <section id="formacion">
+    <h2 class="section-title">Formación</h2>
+    <div class="grid2">
+      <div class="card">
+        <p class="subhead">Académica</p>
+        <div class="entry"><div><p class="title">Licenciatura en Artes Multimediales y Electrónicas</p><p class="desc">UNA — En curso, último cuatrimestre.</p></div></div>
+        <div class="entry"><div><p class="title">Tecnicatura en Artes Multimediales</p><p class="desc">UNA — Completa.</p></div></div>
+      </div>
+      <div class="card">
+        <p class="subhead">Talleres y cursos</p>
+        <div class="entry d"><div class="date">2025</div><div class="desc">"Artes Vivas y Nuevas Tecnologías" — Mariana Cinat y Lucio Bazzalo.</div></div>
+        <div class="entry d"><div class="date">2025</div><div class="desc">"Territorios Invisibles: Arte y Microbiología" — Luciana Paoletti, CCEBA.</div></div>
+        <div class="entry d"><div class="date">2024</div><div class="desc">"Arte y tecnologías creativas, innovación y desarrollo(s)" — Matías Barreto.</div></div>
+        <div class="entry d"><div class="date">2024</div><div class="desc">"Panorama del arte electrónico contemporáneo" — Rodrigo Alonso, CCEBA.</div></div>
+        <div class="entry d"><div class="date">2023</div><div class="desc">"Cultura algorítmica y literatura digital" — Claudia Kozak, Medialab-CCEBA.</div></div>
+        <div class="entry d"><div class="date">2023</div><div class="desc">"Nuevas tecnologías para la escena" — Matías Barreto.</div></div>
+        <div class="entry d"><div class="date">2021–23</div><div class="desc">"LABia" — generación de imágenes con IA, Leah Beo y Martín Carpaneto.</div></div>
+        <div class="entry d"><div class="date">—</div><div class="desc">Formación complementaria: Artes del Movimiento (danza/performance) y Audiovisuales.</div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer><div class="container">Evangelina Moldú · vanshi/sinergy · Buenos Aires</div></footer>
+
+<script>
+(function(){
+  var b=document.getElementById('menuBtn'),m=document.getElementById('menu');
+  function set(o){m.classList.toggle('open',o);b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú');}
+  b.addEventListener('click',function(e){e.stopPropagation();set(!m.classList.contains('open'));});
+  m.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+  document.addEventListener('click',function(e){if(!m.contains(e.target))set(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){set(false);b.focus();}});
+})();
+</script>
+
+<script>
+(function(){
+  /* ====== COMPLETÁ ACÁ TUS VIDEOS Y LINKS ======
+     YouTube: pegá el ID o el link completo (se limpia solo, incluso con &t=7s). Ej: youtube.com/watch?v=dQw4w9WgXcQ → 'dQw4w9WgXcQ'
+     Google Drive: pegá el link de compartir (el archivo tiene que estar en «Cualquier persona con el vínculo»). Ej: {type:'drive',id:'https://drive.google.com/file/d/XXXX/view',title:'Reel'}
+     Varios videos chicos en grilla (ocupan poco lugar): {type:'grid',items:[{src:'videos/avlive.mp4',title:'AV LIVE'},{src:'videos/slicelab.mp4',title:'SliceLab'}]}
+     Con silent:true el video va mudo, en loop y arranca solo (como un GIF); sin eso, se reproduce al tocarlo y con sonido.
+     Archivo propio: poné el archivo en la carpeta "videos/" junto a este HTML y escribí la ruta. Ej: 'videos/reel.mp4'
+     Lo que esté vacío ('') no se muestra, así que no se rompe nada. */
+  var MEDIA={
+    dreamstates:[{type:'youtube',id:'wleTV9n3Q1k',title:'Dreamstates TV'}],
+    tercerbrazo:[{type:'instagram',url:'https://www.instagram.com/p/C-F9_3wNUnc/',title:'Tercer Brazo Estudio'}],
+    torneo:[{type:'youtube',id:'sd6yKi8uXUY',title:'Torneo Argentino Rojas'}],
+    freelance:[{type:'file',src:'videos/capsula-geikha.mp4',poster:'',title:'Cápsula Geikha — Modulaciones'},{type:'file',src:'videos/presentacioncv2612.mp4',poster:'',title:'Presentación'},{type:'file',src:'videos/girlstothefront.mp4',poster:'',title:'Girls to the Front'}],
+    vj:[{type:'grid',items:[{yt:'gw2OW2eIVOk',title:'Visuales en vivo (VJ)'},{src:'videos/paulina2.mp4',title:'Paulina',silent:true},{img:'imagen/VISUALES.jpg',title:'Visuales 1'},{img:'imagen/VISUALES2.jpg',title:'Visuales 2'}]}],
+    modulaciones:[{type:'youtube',id:'x8HAEXfsnpM',title:'Modulaciones'}],
+    catedra:[{type:'gallery',images:[{src:'',alt:''}]},{type:'grid',items:[{src:'videos/docencia.mp4',title:'Proyecto Visual 3',silent:true,mute:true},{src:'videos/docencia2.mp4',title:'Proyecto Visual 3',silent:true,mute:true}]}],
+    suites:[{type:'grid',items:[{src:'videos/avlive.mp4',full:'videos/avlive_full.mp4',title:'AV LIVE',silent:true,mute:true},{src:'videos/SliceLab.mp4',title:'SliceLab',silent:true,mute:true},{src:'videos/sentiolab.mp4',title:'SentioLab',silent:true,mute:true},{src:'videos/mohaly.mp4',title:'Moholy-Nagy Studio',silent:true,mute:true},{src:'videos/tanglelab.mp4',title:'TangleLab',silent:true,mute:true}]},{type:'embed',src:'',title:'Demo en vivo'}]
+  };
+  var LINKS={
+    modulaciones:[{label:'Web de Modulaciones',url:''},{label:'Canal de YouTube',url:'https://www.youtube.com/@Modulaciones'}],
+    suites:[{label:'Abrir las herramientas',url:''}]
+  };
+  /* ============================================= */
+
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var PLAY='<svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(13,13,17,.72)" stroke="#8A73FF" stroke-width="2"/><path d="M26 20l20 12-20 12z" fill="#fff"/></svg>';
+  function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h)e.innerHTML=h;return e}
+  function frame(c){var f=el('div','frame');f.appendChild(c);return f}
+  function yid(v){var r=String(v).match(/(?:v=|youtu\.be\/|embed\/|shorts\/)?([A-Za-z0-9_-]{11})/);return r?r[1]:''}
+  function ystart(v){var r=String(v).match(/[?&#]t=(\d+)/);return r?r[1]:''}
+  var ytP=null;
+  function ytApi(){
+    if(ytP)return ytP;
+    ytP=new Promise(function(ok,no){
+      if(window.YT&&window.YT.Player){ok();return;}
+      var prev=window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady=function(){if(prev)prev();ok();};
+      var sc=document.createElement('script');sc.src='https://www.youtube.com/iframe_api';sc.onerror=no;document.head.appendChild(sc);
+    });
+    return ytP;
+  }
+  /* ph = marcador ya puesto en el DOM; se reemplaza por el reproductor y se fuerza el inicio (por defecto 0:00, sin retomar donde se dejó) */
+  function ytEmbed(ph,id,st,title){
+    st=+st||0;
+    function plain(){
+      var i=el('iframe');i.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&start='+st;
+      i.title=title||'Video';i.referrerPolicy='strict-origin-when-cross-origin';
+      i.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';i.allowFullscreen=true;ph.replaceWith(i);
+    }
+    ytApi().then(function(){
+      try{
+        new YT.Player(ph,{videoId:id,host:'https://www.youtube-nocookie.com',
+          playerVars:{autoplay:1,rel:0,start:st,playsinline:1},
+          events:{onReady:function(e){try{e.target.getIframe().title=title||'Video';}catch(_){}e.target.seekTo(st,true);e.target.playVideo();}}});
+      }catch(_){plain();}
+    },plain);
+  }
+  function youtube(m){
+    var id=yid(m.id),st=ystart(m.id);
+    var b=el('button','yt',PLAY);b.type='button';
+    b.setAttribute('aria-label','Reproducir: '+(m.title||'video'));
+    b.style.backgroundImage='url(https://i.ytimg.com/vi/'+id+'/hqdefault.jpg)';
+    var url='https://www.youtube.com/watch?v='+id+'&t='+(st||1)+'s';
+    b.onclick=function(){
+      if(location.protocol==='file:'){window.open(url,'_blank','noopener');return;}
+      var ph=el('div');b.replaceWith(ph);ytEmbed(ph,id,st,m.title);
+    };
+    var w=el('div');w.appendChild(frame(b));
+    var a=el('a','ylink','Ver en YouTube ↗');a.href=url;a.target='_blank';a.rel='noopener';w.appendChild(a);
+    return w;
+  }
+  function file(m,loop){
+    var v=el('video'),full=m.src+(m.poster||m.src.indexOf('#')>-1?'':'#t=0.1');v.playsInline=true;v.preload='metadata';
+    var lazy=loop&&'IntersectionObserver' in window;if(lazy)v.preload='none';else v.src=full;
+    if(m.poster)v.poster=m.poster;
+    if(loop){v.muted=true;v.loop=true;if(!reduce&&!lazy)v.autoplay=true;v.controls=reduce;}else{v.controls=true;}
+    v.setAttribute('aria-label',m.title||'Video');
+    var w=el('div'),fr=frame(v);w.appendChild(fr);
+    var msg=el('p','vmsg','No se pudo cargar el video. Revisá que el archivo esté en <b>'+m.src.split('#')[0]+'</b> (junto a este HTML) y que sea MP4 H.264.');msg.hidden=true;w.appendChild(msg);
+    v.addEventListener('loadedmetadata',function(){if(v.videoWidth&&v.videoHeight){var r=v.videoWidth/v.videoHeight;fr.style.aspectRatio=r;if(r<1)fr.style.maxWidth='340px';}});
+    v.addEventListener('error',function(){msg.hidden=false;});
+    if(lazy){
+      var io=new IntersectionObserver(function(es){es.forEach(function(en){
+        if(en.isIntersecting){if(!v.getAttribute('src'))v.src=full;if(!reduce){var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}}
+        else if(v.getAttribute('src')){v.pause();}
+      });},{rootMargin:'150px'});
+      io.observe(v);
+    }
+    if(!loop){
+      var pb=el('button','vplay',PLAY);pb.type='button';pb.setAttribute('aria-label','Reproducir: '+(m.title||'video'));
+      pb.onclick=function(){v.play();};
+      v.addEventListener('play',function(){pb.hidden=true;});
+      v.addEventListener('ended',function(){pb.hidden=false;});
+      v.addEventListener('error',function(){pb.hidden=true;});
+      fr.appendChild(pb);
+    }
+    return w;
+  }
+  function instagram(m){
+    var r=String(m.url).match(/instagram\.com\/(p|reel|tv)\/([A-Za-z0-9_-]+)/);if(!r)return null;
+    var page='https://www.instagram.com/'+r[1]+'/'+r[2]+'/';
+    var w=el('div','igwrap');
+    var b=el('button','ig',PLAY+'<span>Ver publicación original en Instagram</span>');b.type='button';
+    b.setAttribute('aria-label','Abrir: '+(m.title||'publicación de Instagram'));
+    b.onclick=function(){
+      if(location.protocol==='file:'){window.open(page,'_blank','noopener');return;}
+      var q=el('blockquote','instagram-media');
+      q.setAttribute('data-instgrm-permalink',page+'?utm_source=ig_embed&utm_campaign=loading');q.setAttribute('data-instgrm-version','14');
+      q.style.cssText='background:#fff;border:0;margin:0;max-width:400px;width:100%;min-width:260px';
+      var l=el('a');l.href=page;l.textContent='Cargando publicación de Instagram…';q.appendChild(l);b.replaceWith(q);
+      function go(){if(window.instgrm)window.instgrm.Embeds.process();}
+      if(window.instgrm)go();else{var sc=el('script');sc.async=true;sc.src='https://www.instagram.com/embed.js';sc.onload=go;document.body.appendChild(sc);}
+    };
+    w.appendChild(b);
+    var a=el('a','ylink','Ver en Instagram ↗');a.href=page;a.target='_blank';a.rel='noopener';
+    var d=el('div');d.appendChild(w);d.appendChild(a);return d;
+  }
+  function embed(m){
+    var b=el('button','live',PLAY+'<span>'+(m.title||'Abrir demo en vivo')+'</span>');b.type='button';
+    b.onclick=function(){var i=el('iframe');i.src=m.src;i.title=m.title||'Demo';i.loading='lazy';i.setAttribute('sandbox','allow-scripts allow-same-origin allow-popups allow-forms');i.allowFullscreen=true;b.replaceWith(i);};
+    return frame(b);
+  }
+  function drive(m){
+    var r=String(m.id).match(/\/d\/([A-Za-z0-9_-]+)/)||String(m.id).match(/[?&]id=([A-Za-z0-9_-]+)/)||String(m.id).match(/^([A-Za-z0-9_-]{15,})$/);
+    if(!r)return null;
+    var id=r[1],page='https://drive.google.com/file/d/'+id+'/view';
+    var i=el('iframe');i.src='https://drive.google.com/file/d/'+id+'/preview';i.title=m.title||'Video';i.loading='lazy';
+    i.allow='autoplay; fullscreen';i.allowFullscreen=true;
+    var w=el('div');w.appendChild(frame(i));
+    var a=el('a','ylink','Ver en Drive ↗');a.href=page;a.target='_blank';a.rel='noopener';w.appendChild(a);
+    return w;
+  }
+  function gallery(m){
+    var imgs=(m.images||[]).filter(function(x){return x.src});if(!imgs.length)return null;
+    var g=el('div','gallery');
+    imgs.forEach(function(x){var i=el('img');i.src=x.src;i.alt=x.alt||'';i.loading='lazy';g.appendChild(i);});
+    return g;
+  }
+  var fwEl=null;
+  function floatWin(x){
+    closeFloat();
+    var back=el('div','fw-back'),w=el('div','fw'),bar=el('div','fw-bar'),x1=el('button','fw-x','&times;');
+    w.setAttribute('role','dialog');w.setAttribute('aria-modal','true');w.setAttribute('aria-label',x.title||'Video');
+    x1.type='button';x1.setAttribute('aria-label','Cerrar');
+    bar.appendChild(el('span','fw-title',x.title||'Video'));bar.appendChild(x1);
+    var v;
+    if(x.yt){
+      var id=yid(x.yt),st=ystart(x.yt);
+      v=el('div','fw-yt');
+    }else if(x.img){
+      v=el('img');v.src=x.img;v.alt=x.title||'';
+    }else{
+      v=el('video');v.src=x.full||x.src;v.controls=true;v.playsInline=true;v.autoplay=true;
+      if(x.mute){v.muted=true;v.defaultMuted=true;}
+    }
+    w.appendChild(bar);w.appendChild(v);back.appendChild(w);document.body.appendChild(back);
+    if(x.yt)ytEmbed(v,yid(x.yt),ystart(x.yt),x.title);
+    fwEl={back:back,v:v,prev:document.activeElement};
+    var dx=0,dy=0,sx,sy,drag=false;
+    bar.addEventListener('pointerdown',function(e){if(e.target===x1)return;drag=true;sx=e.clientX-dx;sy=e.clientY-dy;bar.setPointerCapture(e.pointerId)});
+    bar.addEventListener('pointermove',function(e){if(!drag)return;dx=e.clientX-sx;dy=e.clientY-sy;w.style.transform='translate('+dx+'px,'+dy+'px)'});
+    bar.addEventListener('pointerup',function(){drag=false});
+    x1.addEventListener('click',closeFloat);
+    back.addEventListener('mousedown',function(e){if(e.target===back)closeFloat()});
+    x1.focus();
+  }
+  function closeFloat(){
+    if(!fwEl)return;
+    if(fwEl.v.pause){fwEl.v.pause();}fwEl.v.removeAttribute('src');if(fwEl.v.load)fwEl.v.load();
+    fwEl.back.remove();if(fwEl.prev&&fwEl.prev.focus)fwEl.prev.focus();fwEl=null;
+  }
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeFloat()});
+  function grid(m){
+    var its=(m.items||[]).filter(function(x){return x.src||x.yt||x.img});if(!its.length)return null;
+    var g=el('div','vgrid');
+    its.forEach(function(x){
+      var t=el('div','vtile'),v;
+      if(x.yt){
+        var th=el('div','yt',PLAY);th.style.backgroundImage='url(https://i.ytimg.com/vi/'+yid(x.yt)+'/hqdefault.jpg)';
+        v=el('div');v.appendChild(frame(th));
+      }else if(x.img){
+        var im=el('img');im.src=x.img;im.alt=x.title||'';im.loading='lazy';im.decoding='async';
+        v=el('div');v.appendChild(frame(im));
+      }else{v=file(x,!!x.silent);}
+      t.appendChild(v);
+      var fr=v.querySelector('.frame'),ob=el('button','vopen');ob.type='button';ob.setAttribute('aria-label','Abrir '+(x.title||(x.img?'imagen':'video'))+' en ventana flotante');
+      ob.addEventListener('click',function(){if(x.yt&&location.protocol==='file:'){window.open('https://www.youtube.com/watch?v='+yid(x.yt)+'&t='+(ystart(x.yt)||1)+'s','_blank','noopener');return;}floatWin(x)});fr.appendChild(ob);
+      if(x.title)t.appendChild(el('p','vcap',x.title));
+      g.appendChild(t);
+    });
+    return g;
+  }
+  var build={
+    youtube:function(m){return m.id?youtube(m):null},
+    drive:function(m){return m.id?drive(m):null},
+    file:function(m){return m.src?file(m,false):null},
+    loop:function(m){return m.src?file(m,true):null},
+    embed:function(m){return m.src?embed(m):null},
+    instagram:function(m){return m.url?instagram(m):null},
+    grid:grid,
+    gallery:gallery
+  };
+  document.querySelectorAll('.media').forEach(function(box){
+    var k=box.getAttribute('data-media');
+    (MEDIA[k]||[]).forEach(function(m){var n=build[m.type]&&build[m.type](m);if(n)box.appendChild(n);});
+    var ls=(LINKS[k]||[]).filter(function(l){return l.url});
+    if(ls.length){var d=el('div','links');ls.forEach(function(l){var a=el('a');a.href=l.url;a.target='_blank';a.rel='noopener';a.textContent=l.label+' ↗';d.appendChild(a);});box.appendChild(d);}
+  });
+
+  document.getElementById('printBtn').addEventListener('click',function(){window.print();});
+})();
+</script>
+</body>
+</html>
