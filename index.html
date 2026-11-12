@@ -154,10 +154,11 @@ footer{margin-top:72px;padding:36px 0;text-align:center;color:var(--muted);font-
   :root{--bg:#fff;--card:#fff;--line:#d9d9e0;--text:#222;--muted:#555;--bright:#000;--accent:#5b46d6}
   body{background:#fff}
   @page{size:A4;margin:14mm}
-  header,.chip svg,.frame,.gallery,.igwrap,.vgrid,.fw-back{display:none}
+  header,.menu-panel,.media,.chip svg,.frame,.gallery,.igwrap,.vgrid,.fw-back,video,iframe{display:none!important}
+  body{background-image:none!important}
   .links a::after,.ylink::after{content:" — " attr(href);color:#555;font-size:.8rem}
   .avatar{box-shadow:none}
-  .hero,.card{backdrop-filter:none;break-inside:avoid}
+  .hero,.card{backdrop-filter:none;box-shadow:none}
   .entry{break-inside:avoid}
 }
 </style>
