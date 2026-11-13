@@ -81,6 +81,7 @@ section{padding:52px 0 8px}
 .subhead{font-family:var(--h);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding:20px 0 4px}
 .grid2 .entry{grid-template-columns:1fr;padding:16px 0}
 .grid2 .entry.d{grid-template-columns:64px 1fr;gap:4px 16px}
+.entry>*,.skill>*,.grid2>*,.media,.media>*{min-width:0}
 
 
 /* Botón guardar PDF */
@@ -105,7 +106,7 @@ section{padding:52px 0 8px}
 .yt,.live{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;color:var(--bright);font-family:var(--h);font-weight:600;font-size:.9rem;background:#101016 center/cover no-repeat;border:0}
 .yt:hover svg,.live:hover svg{transform:scale(1.08)}
 .yt svg,.live svg{transition:transform .2s}
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;max-width:620px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(170px,100%),1fr));gap:12px;max-width:620px;width:100%}
 .vgrid .frame{max-width:none}
 .vtile{cursor:pointer}
 .vtile .frame{transition:border-color .2s,transform .2s}
@@ -130,7 +131,7 @@ section{padding:52px 0 8px}
 .vplay:hover svg{transform:scale(1.08)}
 .vplay svg{transition:transform .2s}
 .vcap{margin:6px 0 0;font-size:.8rem;color:var(--muted)}
-.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;max-width:620px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(150px,100%),1fr));width:100%;gap:10px;max-width:620px}
 .gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block}
 .links{display:flex;flex-wrap:wrap;gap:10px}
 .links a{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;font-size:.88rem;text-decoration:none;color:var(--text);background:rgba(255,255,255,.03);transition:border-color .2s,color .2s}
@@ -144,7 +145,9 @@ footer{margin-top:72px;padding:36px 0;text-align:center;color:var(--muted);font-
   .hero{margin-top:40px;padding:30px 22px;flex-direction:column-reverse;align-items:flex-start;gap:24px}
   .avatar{width:130px;height:130px}
   .card,.card.pad{padding:8px 20px}.card.pad{padding:24px 20px}
-  .entry,.skill,.grid2,.grid2 .entry.d{grid-template-columns:1fr}
+  .entry,.skill,.grid2,.grid2 .entry.d{grid-template-columns:minmax(0,1fr)}
+  .vgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .vtile{min-width:0}
   .grid2{gap:0}
   .date{padding-top:0}
   .menu-panel{right:18px}
